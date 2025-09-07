@@ -1,18 +1,28 @@
 package com.heartme.authservice.controller;
 
+import java.util.Collections;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.heartme.authservice.dto.LoginRequest;
 import com.heartme.authservice.dto.RegisterRequest;
 import com.heartme.authservice.model.UserCredentials;
+import com.heartme.authservice.security.JwtUtil;
 import com.heartme.authservice.service.AuthService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
     private final AuthService authService;
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @Autowired
     public AuthController(AuthService authService) {
@@ -23,7 +33,6 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
         try {
-            // Validações básicas
             if (request.getEmail() == null || request.getEmail().isBlank()) {
                 return ResponseEntity.badRequest().body("Email é obrigatório");
             }
@@ -50,11 +59,11 @@ public class AuthController {
                 return ResponseEntity.badRequest().body("Senha é obrigatória");
             }
 
-            UserCredentials user = authService.login(request);
-            return ResponseEntity.ok(user);
+            // Aqui você valida usuário/senha do banco
+            String token = jwtUtil.generateToken(request.getEmail());
+            return ResponseEntity.ok(Collections.singletonMap("token", token));
         } catch (Exception e) {
             return ResponseEntity.status(401).body("Erro no login: " + e.getMessage());
         }
     }
 }
-

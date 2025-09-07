@@ -48,5 +48,8 @@ public class UserService {
 
     public void delete(UUID id) {
         userRepository.deleteById(id);
+
+        // 🔹 Futuro: chamar o auth-service para setar enabled=false
+        // ex: authClient.disableUserById(userId);
     }
 }
