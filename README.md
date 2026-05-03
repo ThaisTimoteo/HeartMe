@@ -1,9 +1,10 @@
-# HeartMe
+<h1 align="center">HeartMe</h1>
 
 <p align="center">
-  <b>Uma aplicação web de rede social baseada em microserviços</b><br>
-  Arquitetura moderna com Spring Boot, WebSocket e Nginx
+  <i>Uma aplicação web de rede social baseada em microserviços</i>
 </p>
+
+<br>
 
 ---
 
