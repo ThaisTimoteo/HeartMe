@@ -2,16 +2,16 @@ services:
   db:
     image: postgres:16
     environment:
-      POSTGRES_DB: heartme_db_patched
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: ${POSTGRES_DB:-heartme_db}
+      POSTGRES_USER: ${POSTGRES_USER:-admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-admin}
     ports:
       - "5432:5432"
     volumes:
       - heartme_pgdata:/var/lib/postgresql/data
       - ./db/init:/docker-entrypoint-initdb.d
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U admin -d heartme_db_patched"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-admin} -d ${POSTGRES_DB:-heartme_db}"]
       interval: 5s
       timeout: 5s
       retries: 20
@@ -23,11 +23,11 @@ services:
         condition: service_healthy
     environment:
       SPRING_PROFILES_ACTIVE: docker
-      JWT_SECRET: "minhaChaveSuperSecretaComMaisDe32Bytes123!"
-      DB_URL: "jdbc:postgresql://db:5432/heartme_db_patched"
-      DB_USER: "admin"
-      DB_PASS: "admin"
-      DB_SCHEMA: "auth"
+      JWT_SECRET: ${JWT_SECRET:-change_this_secret}
+      DB_URL: jdbc:postgresql://db:5432/${POSTGRES_DB:-heartme_db}
+      DB_USER: ${POSTGRES_USER:-admin}
+      DB_PASS: ${POSTGRES_PASSWORD:-admin}
+      DB_SCHEMA: auth
     ports:
       - "8080:8080"
 
@@ -38,11 +38,11 @@ services:
         condition: service_healthy
     environment:
       SPRING_PROFILES_ACTIVE: docker
-      JWT_SECRET: "minhaChaveSuperSecretaComMaisDe32Bytes123!"
-      DB_URL: "jdbc:postgresql://db:5432/heartme_db_patched"
-      DB_USER: "admin"
-      DB_PASS: "admin"
-      DB_SCHEMA: "users"
+      JWT_SECRET: ${JWT_SECRET:-change_this_secret}
+      DB_URL: jdbc:postgresql://db:5432/${POSTGRES_DB:-heartme_db}
+      DB_USER: ${POSTGRES_USER:-admin}
+      DB_PASS: ${POSTGRES_PASSWORD:-admin}
+      DB_SCHEMA: users
     ports:
       - "8081:8081"
 
@@ -53,17 +53,15 @@ services:
         condition: service_healthy
     environment:
       SPRING_PROFILES_ACTIVE: docker
-      JWT_SECRET: "minhaChaveSuperSecretaComMaisDe32Bytes123!"
-      DB_URL: "jdbc:postgresql://db:5432/heartme_db_patched"
-      DB_USER: "admin"
-      DB_PASS: "admin"
-      DB_SCHEMA: "posts"
+      JWT_SECRET: ${JWT_SECRET:-change_this_secret}
+      DB_URL: jdbc:postgresql://db:5432/${POSTGRES_DB:-heartme_db}
+      DB_USER: ${POSTGRES_USER:-admin}
+      DB_PASS: ${POSTGRES_PASSWORD:-admin}
+      DB_SCHEMA: posts
       NOTIFICATION_ENABLED: "true"
-      NOTIFICATION_BASE_URL: "http://notification-service:8083"
-      NOTIFICATION_BASEURL: "http://notification-service:8083"
-      USER_SERVICE_BASE_URL: "http://user-service:8081"
-      USER_SERVICE_BASEURL: "http://user-service:8081"
-      UNSPLASH_API_KEY: "${UNSPLASH_API_KEY:-lWKFbkohKCuIxBdXPDhDh-kmESHu_z_E_SieX_AevFw}"
+      NOTIFICATION_BASE_URL: http://notification-service:8083
+      USER_SERVICE_BASE_URL: http://user-service:8081
+      UNSPLASH_API_KEY: ${UNSPLASH_API_KEY:-your_unsplash_key_here}
     ports:
       - "8082:8082"
 
@@ -74,15 +72,14 @@ services:
         condition: service_healthy
     environment:
       SPRING_PROFILES_ACTIVE: docker
-      JWT_SECRET: "minhaChaveSuperSecretaComMaisDe32Bytes123!"
-      DB_URL: "jdbc:postgresql://db:5432/heartme_db_patched"
-      DB_USER: "admin"
-      DB_PASS: "admin"
-      DB_SCHEMA: "notifications"
+      JWT_SECRET: ${JWT_SECRET:-change_this_secret}
+      DB_URL: jdbc:postgresql://db:5432/${POSTGRES_DB:-heartme_db}
+      DB_USER: ${POSTGRES_USER:-admin}
+      DB_PASS: ${POSTGRES_PASSWORD:-admin}
+      DB_SCHEMA: notifications
     ports:
       - "8083:8083"
 
-  # Front-end (vanilla, estilo Pinterest)
   front:
     build: ./front
     depends_on:
