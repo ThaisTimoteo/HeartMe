@@ -17,15 +17,35 @@ O projeto foi desenvolvido com foco na aplicação prática de conceitos moderno
 
 ## Demonstração
 
-<img width="1883" height="903" alt="Captura de tela 2026-05-03 114045" src="https://github.com/user-attachments/assets/f47a2c8c-0680-4656-8707-05ae47d8f7c0" />
+<p align="center">
+  <b>Visão geral da aplicação</b>
+</p>
 
-<img width="1898" height="903" alt="Captura de tela 2026-05-03 115351" src="https://github.com/user-attachments/assets/0c312b90-fb5e-490a-8d44-275134740165" />
+<br>
 
-<img width="1880" height="899" alt="Captura de tela 2026-05-03 115158" src="https://github.com/user-attachments/assets/1801d8a3-b2f0-4e94-9baa-a3bb640d3e4b" />
+<table align="center">
+  <tr>
+    <td align="center">
+      <b>Tela de Login</b><br><br>
+      <img src="https://github.com/user-attachments/assets/f47a2c8c-0680-4656-8707-05ae47d8f7c0" width="420"/>
+    </td>
+    <td align="center">
+      <b>Feed Principal</b><br><br>
+      <img src="https://github.com/user-attachments/assets/0c312b90-fb5e-490a-8d44-275134740165" width="420"/>
+    </td>
+  </tr>
 
-<img width="1877" height="900" alt="Captura de tela 2026-05-03 115103" src="https://github.com/user-attachments/assets/798596ae-10a6-42f6-a375-d0ded54c048d" />
-
-
+  <tr>
+    <td align="center">
+      <b>Visualização de Post</b><br><br>
+      <img src="https://github.com/user-attachments/assets/1801d8a3-b2f0-4e94-9baa-a3bb640d3e4b" width="420"/>
+    </td>
+    <td align="center">
+      <b>Perfil do Usuário</b><br><br>
+      <img src="https://github.com/user-attachments/assets/798596ae-10a6-42f6-a375-d0ded54c048d" width="420"/>
+    </td>
+  </tr>
+</table>
 ---
 
 ## Funcionalidades
@@ -60,21 +80,6 @@ O projeto foi desenvolvido com foco na aplicação prática de conceitos moderno
 
 ---
 
-## Arquitetura Simplificada
-[ Frontend ]
-↓
-[ Nginx ]
-↓
-┌───────────────┬───────────────┬───────────────┐
-│ auth-service │ user-service │ post-service │
-└───────────────┴───────────────┴───────────────┘
-↓
-notification-service
-↓
-PostgreSQL
-
----
-
 ## Fluxo do Usuário
 
 O usuário pode:
@@ -87,13 +92,11 @@ Receber notificações em tempo real
 
 ---
 
-##Conceitos aplicados
+## Conceitos aplicados
 Arquitetura de microserviços
 API REST
 Comunicação em tempo real com WebSocket
 Proxy reverso com Nginx
 Containerização com Docker
 Separação de responsabilidades
-
-
 
