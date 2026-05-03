@@ -1,0 +1,97 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: heartme_db_patched
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
+    volumes:
+      - heartme_pgdata:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d heartme_db_patched"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  auth-service:
+    build: ./HeartMe_patched/auth-service/authservice
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      JWT_SECRET: "minhaChaveSuperSecretaComMaisDe32Bytes123!"
+      DB_URL: "jdbc:postgresql://db:5432/heartme_db_patched"
+      DB_USER: "admin"
+      DB_PASS: "admin"
+      DB_SCHEMA: "auth"
+    ports:
+      - "8080:8080"
+
+  user-service:
+    build: ./HeartMe_patched/user-service/userservice
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      JWT_SECRET: "minhaChaveSuperSecretaComMaisDe32Bytes123!"
+      DB_URL: "jdbc:postgresql://db:5432/heartme_db_patched"
+      DB_USER: "admin"
+      DB_PASS: "admin"
+      DB_SCHEMA: "users"
+    ports:
+      - "8081:8081"
+
+  post-service:
+    build: ./HeartMe_patched/post-service/postservice
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      JWT_SECRET: "minhaChaveSuperSecretaComMaisDe32Bytes123!"
+      DB_URL: "jdbc:postgresql://db:5432/heartme_db_patched"
+      DB_USER: "admin"
+      DB_PASS: "admin"
+      DB_SCHEMA: "posts"
+      NOTIFICATION_ENABLED: "true"
+      NOTIFICATION_BASE_URL: "http://notification-service:8083"
+      NOTIFICATION_BASEURL: "http://notification-service:8083"
+      USER_SERVICE_BASE_URL: "http://user-service:8081"
+      USER_SERVICE_BASEURL: "http://user-service:8081"
+      UNSPLASH_API_KEY: "${UNSPLASH_API_KEY:-lWKFbkohKCuIxBdXPDhDh-kmESHu_z_E_SieX_AevFw}"
+    ports:
+      - "8082:8082"
+
+  notification-service:
+    build: ./HeartMe_patched/notification-service/notificationservice
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      JWT_SECRET: "minhaChaveSuperSecretaComMaisDe32Bytes123!"
+      DB_URL: "jdbc:postgresql://db:5432/heartme_db_patched"
+      DB_USER: "admin"
+      DB_PASS: "admin"
+      DB_SCHEMA: "notifications"
+    ports:
+      - "8083:8083"
+
+  # Front-end (vanilla, estilo Pinterest)
+  front:
+    build: ./front
+    depends_on:
+      - auth-service
+      - user-service
+      - post-service
+      - notification-service
+    ports:
+      - "3000:80"
+
+volumes:
+  heartme_pgdata:

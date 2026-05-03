@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Heart.me</title>
+  <link rel="icon" type="image/png" href="assets/heartme.logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sniglet:wght@400;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app" class="app">
+    <aside id="sidebar" class="sidebar" hidden aria-label="Navegação principal">
+      <a class="brand" href="#/feed" aria-label="Heart.me">
+        <img src="assets/heartme.logo.png" alt="Heart.me" class="brand__logo" />
+      </a>
+
+      <nav class="sidebar__nav">
+        <button class="navbtn" id="btnFeed" type="button" title="Início">
+          <img src="assets/home.png" alt="" class="navbtn__icon" />
+          <span>Início</span>
+        </button>
+        <button class="navbtn" id="btnExplore" type="button" title="Explorar">
+          <img src="assets/explore.png" alt="" class="navbtn__icon" />
+          <span>Explorar</span>
+        </button>
+        <button class="navbtn" id="btnCreate" type="button" title="Criar post">
+          <img src="assets/createpost.png" alt="" class="navbtn__icon" />
+          <span>Criar</span>
+        </button>
+        <button class="navbtn" id="btnFolders" type="button" title="Pastas salvas">
+          <img src="assets/folders.png" alt="" class="navbtn__icon" />
+          <span>Pastas</span>
+        </button>
+        <button class="navbtn" id="btnNotifs" type="button" title="Notificações">
+          <img src="assets/notificaticion.png" alt="" class="navbtn__icon" />
+          <span>Notificações</span>
+          <span class="badge" id="notifBadge" hidden>0</span>
+        </button>
+        <button class="navbtn" id="btnSettings" type="button" title="Conta e perfil">
+          <span class="navbtn__gear">⚙</span>
+          <span>Conta</span>
+        </button>
+      </nav>
+    </aside>
+
+    <div class="shell">
+      <header id="topbar" class="topbar" hidden>
+        <form class="search" id="searchForm">
+          <img src="assets/search-icon.png" alt="" class="search__iconimg" />
+          <input id="searchInput" class="search__input" placeholder="Pesquisar posts" autocomplete="off" />
+        </form>
+
+        <div class="topbar__right">
+          <button id="profileMenuBtn" class="profilechip" type="button" aria-haspopup="true" aria-expanded="false">
+            <img id="profileAvatar" class="avatar" alt="Avatar" />
+            <div class="profilechip__text">
+              <strong id="menuNameTop">Heart.me</strong>
+              <span id="menuSubTop">Conta</span>
+            </div>
+          </button>
+
+          <div id="profileMenu" class="menu" hidden role="menu">
+            <div class="menu__header">
+              <img id="menuAvatar" class="avatar avatar--lg" alt="Avatar" />
+              <div>
+                <div id="menuName" class="menu__title">Heart.me</div>
+                <div id="menuSub" class="menu__sub">Conta</div>
+              </div>
+            </div>
+            <button id="menuProfile" class="menu__item" type="button" role="menuitem">Conta e perfil</button>
+            <button id="menuLogout" class="menu__item menu__item--danger" type="button" role="menuitem">Sair</button>
+          </div>
+        </div>
+      </header>
+
+      <main id="view" class="view"></main>
+    </div>
+  </div>
+
+  <div id="modal" class="modal" hidden>
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal__header">
+        <h3 class="modal__title" id="modalTitle">Confirmar</h3>
+        <button class="modal__close" type="button" data-close aria-label="Fechar">×</button>
+      </div>
+      <div id="modalBody" class="modal__body"></div>
+      <div id="modalFooter" class="modal__footer"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
