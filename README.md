@@ -26,3 +26,74 @@ O projeto foi desenvolvido com foco na aplicação prática de conceitos moderno
 <img width="1877" height="900" alt="Captura de tela 2026-05-03 115103" src="https://github.com/user-attachments/assets/798596ae-10a6-42f6-a375-d0ded54c048d" />
 
 
+---
+
+## Funcionalidades
+
+- Autenticação de usuários (cadastro e login)
+- Criação e edição de perfil
+- Publicação de posts com imagem
+- Curtidas em posts
+- Sistema de notificações em tempo real
+- Interface web integrada via proxy reverso
+- Estrutura baseada em microserviços independentes
+
+---
+
+## Tecnologias
+
+### Back-end
+- Java + Spring Boot
+- Spring Security
+- Spring Data JPA
+- WebSocket (STOMP)
+- Maven
+
+### Front-end
+- HTML, CSS, JavaScript
+
+### Infraestrutura
+- Docker
+- Docker Compose
+- Nginx
+- PostgreSQL
+
+---
+
+## Arquitetura Simplificada
+[ Frontend ]
+↓
+[ Nginx ]
+↓
+┌───────────────┬───────────────┬───────────────┐
+│ auth-service │ user-service │ post-service │
+└───────────────┴───────────────┴───────────────┘
+↓
+notification-service
+↓
+PostgreSQL
+
+---
+
+## Fluxo do Usuário
+
+O usuário pode:
+
+Criar uma conta e fazer login
+Configurar seu perfil (nome, bio, avatar)
+Publicar conteúdo com imagem
+Interagir com posts (curtidas)
+Receber notificações em tempo real
+
+---
+
+##Conceitos aplicados
+Arquitetura de microserviços
+API REST
+Comunicação em tempo real com WebSocket
+Proxy reverso com Nginx
+Containerização com Docker
+Separação de responsabilidades
+
+
+
