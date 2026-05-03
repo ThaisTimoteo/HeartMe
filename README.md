@@ -27,22 +27,22 @@ O projeto foi desenvolvido com foco na aplicação prática de conceitos moderno
   <tr>
     <td align="center">
       <b>Tela de Pesquisa</b><br><br>
-      <img src="https://github.com/user-attachments/assets/f47a2c8c-0680-4656-8707-05ae47d8f7c0" width="420"/>
+      <img src="https://github.com/user-attachments/assets/f47a2c8c-0680-4656-8707-05ae47d8f7c0" width="480"/>
     </td>
     <td align="center">
       <b>Tela de Login</b><br><br>
-      <img src="https://github.com/user-attachments/assets/0c312b90-fb5e-490a-8d44-275134740165" width="420"/>
+      <img src="https://github.com/user-attachments/assets/0c312b90-fb5e-490a-8d44-275134740165" width="480"/>
     </td>
   </tr>
 
   <tr>
     <td align="center">
       <b>Configuração e Personalização de Conta</b><br><br>
-      <img src="https://github.com/user-attachments/assets/1801d8a3-b2f0-4e94-9baa-a3bb640d3e4b" width="420"/>
+      <img src="https://github.com/user-attachments/assets/1801d8a3-b2f0-4e94-9baa-a3bb640d3e4b" width="480"/>
     </td>
     <td align="center">
       <b>Dashboard</b><br><br>
-      <img src="https://github.com/user-attachments/assets/798596ae-10a6-42f6-a375-d0ded54c048d" width="420"/>
+      <img src="https://github.com/user-attachments/assets/798596ae-10a6-42f6-a375-d0ded54c048d" width="480"/>
     </td>
   </tr>
 </table>
