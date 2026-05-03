@@ -46,6 +46,7 @@ O projeto foi desenvolvido com foco na aplicação prática de conceitos moderno
     </td>
   </tr>
 </table>
+
 ---
 
 ## Funcionalidades
